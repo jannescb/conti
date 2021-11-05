@@ -9,6 +9,12 @@ class Attribute extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'key',
+        'type',
+        'value',
+    ];
+
     //TODO: use Fileable
 
     public function section()

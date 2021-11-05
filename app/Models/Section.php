@@ -3,12 +3,11 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use AwStudio\DynamicAttributes\HasDynamicAttributes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Section extends Model
 {
-    use HasFactory, HasDynamicAttributes;
+    use HasFactory;
 
     protected $fillable = ['type', 'parent_id', 'parent_type', 'order_column'];
 

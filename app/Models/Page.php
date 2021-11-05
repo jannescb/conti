@@ -19,6 +19,9 @@ class Page extends Model
 
     public function getContent()
     {
-        return SectionResource::collection($this->sections->sortBy('order_column'))->toArray(request());
+        $resource = SectionResource::collection($this->sections->sortBy('order_column'))
+            ->toArray(request());
+
+        return array_values($resource);
     }
 }

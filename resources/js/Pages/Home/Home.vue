@@ -1,8 +1,8 @@
 <template>
     <div class="grid grid-cols-3 gap-8 px-8">
-        <div class="col-span-2 flex space-x-6">
+        <div class="flex col-span-2 space-x-6">
             <div>
-                <div class="bg-gray-100 rounded py-4 shadow">
+                <div class="py-4 bg-gray-100 rounded shadow">
                     <div class="border-t border-gray-200">
                         <draggable
                             v-model="sections"
@@ -16,7 +16,7 @@
                             @end="drag = false"
                         >
                             <template #item="{ element }">
-                                <div class="border-b border-gray-200 px-6">
+                                <div class="px-6 border-b border-gray-200">
                                     {{ element.type }}
                                 </div>
                             </template>
@@ -34,7 +34,7 @@
                     item-key="id"
                 >
                     <template #item="{ element }">
-                        <div class="bg-gray-50 rounded px-4 py-1 mb-1">
+                        <div class="px-4 py-1 mb-1 rounded bg-gray-50">
                             <span class="text-xs">
                                 {{ element.type }}
                             </span>
@@ -49,24 +49,16 @@
                 </draggable>
                 <button
                     @click="save()"
-                    class="bg-green text-white rounded shadow px-6 py-1"
+                    class="px-6 py-1 text-white rounded shadow bg-green"
                 >
                     Save
                 </button>
             </div>
         </div>
         <div
-            class="
-                col-span-1
-                bg-gray-900
-                text-green
-                rounded
-                text-xs
-                p-6
-                space-y-4
-            "
+            class="col-span-1 p-6 space-y-4 text-xs bg-gray-900 rounded  text-green"
         >
-            <pre>{{ orderArray }}</pre>
+            <pre>{{ sections }}</pre>
             <pre>{{ content }}</pre>
         </div>
     </div>
@@ -97,22 +89,22 @@ const props = defineProps({
 
 const drag = ref(false);
 
-const orderArray = computed(() => {
-    return props.content.map((section: any) => {
-        return {
-            id: section.id,
-            class: section.class,
-            type: section.type,
-            parent_id: section.parent_id,
-            parent_type: section.parent_type,
-            attributes: section.attributes,
-        };
-    });
-});
+// const orderArray = computed(() => {
+//     return props.content.map((section: any) => {
+//         return {
+//             id: section.id,
+//             class: section.class,
+//             type: section.type,
+//             parent_id: section.parent_id,
+//             parent_type: section.parent_type,
+//             attributes: section.attributes,
+//         };
+//     });
+// });
 
-const save = async () => {
-    const { data } = await axios.post('/order', orderArray.value);
-};
+// const save = async () => {
+//     const { data } = await axios.post('/order', orderArray.value);
+// };
 
 const change = (e: any) => {
     if (e.added) {

@@ -142,6 +142,9 @@ module.exports = {
                 blockquote: {
                     '@apply pb-8': {},
                 },
+                pre: {
+                    '@apply bg-gray-900 rounded text-green p-4 text-xs': {},
+                },
                 '.container .container': {
                     '@apply px-0': {},
                 },

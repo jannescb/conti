@@ -39,16 +39,22 @@ defineProps({
 });
 
 const clone: any = (el: Section) => {
+    // we create a new pool and empty sections for nested sections
+    console.log(el);
+
+    let sections = {
+        sections: el.pool ? [] : null,
+        pool: el.pool?.map((pool: Section) => {
+            return clone(pool);
+        }),
+    };
     return {
         uuid: v4(),
         key: el.key,
         attributes: el.attributes.map((attr: any) => {
             return { uuid: v4(), ...attr };
         }),
-        sections: el.sections ? [] : null,
-        pool: el.sections?.map((section: Section) => {
-            return clone(section);
-        }),
+        ...sections,
     };
 };
 </script>

@@ -20,6 +20,7 @@ export interface Section {
     key: string;
     attributes: Attribute[];
     sections?: Section[];
+    pool?: any[];
 }
 
 export interface Page {
@@ -29,9 +30,12 @@ export interface Page {
 }
 
 export const defineContent = (page: Page, content: any) => {
-    return page ? { ...page.content } : content
+    return page ? { ...JSON.parse(JSON.stringify(page.content)) } : content
 }
 
+export const defineSection = (section:  Section) => {
+    return section
+}
 export const defineAttribute = (attribute:  Attribute) => {
     return attribute
 }

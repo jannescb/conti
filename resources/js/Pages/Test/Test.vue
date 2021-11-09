@@ -29,6 +29,7 @@ import {
     Page,
     defineContent,
     defineAttribute,
+    defineSection,
 } from '@/modules/sections';
 import { useForm } from '@inertiajs/inertia-vue3';
 import DeleteSection from '@/modules/sections/components/DeleteSection.vue';
@@ -44,46 +45,58 @@ const props = defineProps({
     },
 });
 
-const pool: Section[] = [
-    {
-        key: 'Hero',
-        attributes: [
-            defineAttribute({
-                key: 'Title',
-                type: 'text',
-                value: 'foo',
-            }),
-            defineAttribute({
-                key: 'Pages',
-                type: 'select',
-                value: null,
-                options: 'pages',
-                placeholder: 'Seite auswählen',
-            }),
-        ],
-    },
-    {
-        key: 'Cards',
-        attributes: [
-            {
-                key: 'Title',
-                type: 'text',
-            },
-        ],
-        sections: [
-            {
-                key: 'Card',
-                attributes: [
-                    {
-                        key: 'Title',
-                        type: 'text',
-                        value: 'foo',
-                    },
-                ],
-            },
-        ],
-    },
-];
+const HeroSection = defineSection({
+    key: 'Hero',
+    attributes: [
+        defineAttribute({
+            key: 'Title',
+            type: 'text',
+            value: 'foo',
+        }),
+        defineAttribute({
+            key: 'Pages',
+            type: 'select',
+            value: null,
+            options: 'pages',
+            placeholder: 'Seite auswählen',
+        }),
+    ],
+});
+const CardSection = defineSection({
+    key: 'Cards',
+    attributes: [
+        defineAttribute({
+            key: 'Title',
+            type: 'text',
+        }),
+    ],
+    pool: [
+        {
+            key: 'Card',
+            attributes: [
+                defineAttribute({
+                    key: 'Title',
+                    type: 'text',
+                    value: 'foo',
+                }),
+            ],
+            pool: [
+                {
+                    key: 'Tags',
+                    attributes: [
+                        defineAttribute({
+                            key: 'Tag',
+                            type: 'text',
+                            value: 'tag',
+                        }),
+                    ],
+                },
+            ],
+        },
+    ],
+});
+
+const pool: Section[] = [HeroSection, CardSection];
 
 const form = useForm<Page>({
     name: 'Home',

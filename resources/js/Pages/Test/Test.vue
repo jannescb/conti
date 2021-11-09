@@ -1,17 +1,7 @@
 <template>
     <div class="grid grid-cols-4">
         <div class="h-screen col-span-3 px-12 overflow-y-scroll bg-primary-50">
-            <div class="sticky top-0 flex justify-end pb-6">
-                <button
-                    class="px-6 py-2 text-xs text-white bg-black rounded-sm"
-                    :class="{
-                        'bg-opacity-25 pointer-events-none': !form.isDirty,
-                    }"
-                    @click="submit()"
-                >
-                    Save Changes
-                </button>
-            </div>
+            <h1 class="pt-4">Home</h1>
             <SectionsWrapper :sections="form.content.sections">
                 <Sections
                     v-model="form.content.sections"
@@ -21,10 +11,19 @@
             </SectionsWrapper>
         </div>
         <div
-            class="sticky top-0 flex items-center h-screen col-span-1 px-8 bg-white "
+            class="sticky top-0 flex flex-col items-end justify-between h-screen col-span-1 px-8 py-4 bg-white "
         >
-            <div class="w-full">
-                <Pool :pool="pool" class="col-span-1 space-y-2" />
+            <button
+                class="px-6 py-2 text-xs text-white bg-black rounded-sm"
+                :class="{
+                    'bg-opacity-25 pointer-events-none': !form.isDirty,
+                }"
+                @click="submit()"
+            >
+                Save Changes
+            </button>
+            <div class="flex items-center flex-1 w-full">
+                <Pool :pool="pool" class="w-full col-span-1 space-y-2" />
             </div>
         </div>
         <DeleteSection :sections="form.content.sections" />

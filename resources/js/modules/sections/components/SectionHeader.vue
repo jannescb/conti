@@ -17,7 +17,7 @@
                 </g>
             </svg>
         </div>
-        <div class="flex-1 text-sm font-bold text-black">
+        <div class="flex-1 text-base font-bold text-black">
             {{ section.key }}
         </div>
         <div class="flex justify-end flex-1 space-x-4" v-if="actions">

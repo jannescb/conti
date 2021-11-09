@@ -17,11 +17,20 @@
         </template>
         <template #footer v-if="footer">
             <button
-                class="px-6 py-2 text-xs text-white bg-black rounded-sm"
+                class="flex items-center px-6 py-2 text-sm text-black bg-white border border-black rounded-sm "
                 v-for="el in pool"
                 @click="addSection(el)"
             >
-                Add {{ el.key }}
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="-4.5 -4.5 24 24"
+                    class="w-4 h-4 -ml-2 fill-current"
+                >
+                    <path
+                        d="M8.9 6.9v-5a1 1 0 1 0-2 0v5h-5a1 1 0 1 0 0 2h5v5a1 1 0 1 0 2 0v-5h5a1 1 0 1 0 0-2h-5z"
+                    ></path>
+                </svg>
+                {{ el.key }}
             </button>
         </template>
     </draggable>

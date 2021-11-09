@@ -1,7 +1,7 @@
 <template>
     <div>
-        <label for="" v-if="attribute.label">
-            {{ attribute.label }}
+        <label class="block pb-1 text-sm font-bold">
+            {{ attribute.label || attribute.key }}
         </label>
         <div
             class="w-full overflow-hidden text-gray-300 border-2 border-black rounded "

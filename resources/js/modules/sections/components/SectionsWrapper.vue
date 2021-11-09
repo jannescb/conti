@@ -1,6 +1,5 @@
 <template>
-    <div class="h-full sections-wrapper">
-        <div class="w-full my-4" v-if="sections.length < 1"></div>
+    <div class="h-full py-4 sections-wrapper">
         <slot />
     </div>
 </template>

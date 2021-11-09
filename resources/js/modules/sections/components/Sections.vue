@@ -1,20 +1,21 @@
 <template>
     <draggable
+        v-if="sections"
         v-model="sections"
         :group="group"
         itemKey="uuid"
-        class="p-2 space-y-2 bg-white border border-gray-200 border-dashed rounded "
+        class="p-2 space-y-2 bg-white border border-gray-100 border-dashed rounded "
         :class="{
             'h-24': sections.length < 1,
         }"
     >
         <template #item="{ element }">
-            <Section :element="element" />
+            <Section :section="element" />
         </template>
     </draggable>
 </template>
 <script setup lang="ts">
-import { ref, watch, PropType, onMounted } from 'vue';
+import { ref, watch, PropType } from 'vue';
 import draggable from 'vuedraggable';
 import Section from './Section.vue';
 import { Section as SectionInterface } from './../index';
@@ -32,11 +33,7 @@ const props = defineProps({
     },
 });
 
-const sections = ref<SectionInterface[]>([]);
-
-onMounted(() => {
-    sections.value = props.modelValue;
-});
+const sections = ref<SectionInterface[]>(props.modelValue);
 
 watch(
     () => sections,

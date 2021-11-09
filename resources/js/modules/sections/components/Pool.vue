@@ -1,28 +1,30 @@
 <template>
-    <div>
-        <draggable
-            v-model="pool"
-            :group="{
-                name: group,
-                pull: 'clone',
-                put: false,
-            }"
-            :sort="false"
-            :clone="clone"
-            class="border border-gray-200 divide-y"
-        >
-            <template #item="{ element }">
-                <div>
+    <draggable
+        v-model="pool"
+        :group="{
+            name: group,
+            pull: 'clone',
+            put: false,
+        }"
+        :sort="false"
+        :clone="clone"
+        class="space-y-2"
+    >
+        <template #item="{ element }">
+            <SectionWrapper>
+                <SectionTitle>
                     {{ element.key }}
-                </div>
-            </template>
-        </draggable>
-    </div>
+                </SectionTitle>
+            </SectionWrapper>
+        </template>
+    </draggable>
 </template>
 <script setup lang="ts">
 import { PropType } from 'vue';
 import draggable from 'vuedraggable';
 import { v4 } from 'uuid';
+import SectionWrapper from './SectionWrapper.vue';
+import SectionTitle from './SectionTitle.vue';
 import { Section } from './../index';
 
 defineProps({

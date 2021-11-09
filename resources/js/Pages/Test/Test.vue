@@ -17,26 +17,29 @@
             v-if="form.content.sections"
         />
         <Pool :pool="pool" class="col-span-1" />
-    </div>
-    <div class="container mt-5">
-        <!-- <pre>{{ page.content }}</pre> -->
-        <pre>{{ form }}</pre>
+        <DeleteSection :sections="form.content.sections" />
     </div>
 </template>
 <script setup lang="ts">
-import { onMounted } from 'vue';
-import { Sections, Pool, Section } from '@/modules/sections';
+import { PropType } from 'vue';
+import {
+    Sections,
+    Pool,
+    Section,
+    Page,
+    defineContent,
+    defineAttribute,
+} from '@/modules/sections';
 import { useForm } from '@inertiajs/inertia-vue3';
-
-interface Page {
-    name: string;
-    route: string;
-    content: any;
-}
+import DeleteSection from '@/modules/sections/components/DeleteSection.vue';
 
 const props = defineProps({
     page: {
-        type: Object,
+        type: Object as PropType<Page>,
+        default: null,
+    },
+    options: {
+        type: Object as PropType<any>,
         default: null,
     },
 });
@@ -45,15 +48,18 @@ const pool: Section[] = [
     {
         key: 'Hero',
         attributes: [
-            {
+            defineAttribute({
                 key: 'Title',
                 type: 'text',
                 value: 'foo',
-            },
-            {
-                key: 'Intro',
-                type: 'text',
-            },
+            }),
+            defineAttribute({
+                key: 'Pages',
+                type: 'select',
+                value: null,
+                options: 'pages',
+                placeholder: 'Seite auswählen',
+            }),
         ],
     },
     {
@@ -79,12 +85,12 @@ const pool: Section[] = [
     },
 ];
 
-const content = props.page ? { ...props.page.content } : { sections: [] };
-
 const form = useForm<Page>({
     name: 'Home',
     route: 'home',
-    content,
+    content: defineContent(props.page, {
+        sections: [],
+    }),
 });
 
 const submit = () => {

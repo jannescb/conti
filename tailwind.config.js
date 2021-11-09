@@ -20,7 +20,7 @@ module.exports = {
         colors: {
             white: 'white',
             primary: {
-                50: '#EDE6F4',
+                50: '#f6f7fb',
                 100: '#E6D8F5',
                 300: '#6600CB',
                 500: '#48008F',
@@ -34,7 +34,7 @@ module.exports = {
             gray: {
                 50: '#F8F8F8',
                 100: '#EDEDED',
-                200: '#A1A1A1',
+                200: '#e6e8e9',
                 300: '#7D7D7D',
                 400: '#5E5E5E',
                 500: '#4C4C4C',
@@ -67,6 +67,13 @@ module.exports = {
         },
         boxShadow: {
             DEFAULT: '0px 28px 32px -22px rgba(0,0,0,0.15)',
+        },
+        cursor: {
+            auto: 'auto',
+            default: 'default',
+            pointer: 'pointer',
+            grab: 'grab',
+            'not-allowed': 'not-allowed',
         },
         extend: {},
     },

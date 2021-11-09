@@ -1,22 +1,30 @@
 <template>
-    <div class="container flex justify-end pb-6">
-        <button
-            class="px-4 py-1 text-xs text-white rounded bg-green"
-            :class="{
-                'bg-opacity-25 pointer-events-none': !form.isDirty,
-            }"
-            @click="submit()"
+    <div class="grid grid-cols-4">
+        <div class="h-screen col-span-3 px-12 overflow-y-scroll bg-primary-50">
+            <div class="sticky top-0 flex justify-end pb-6">
+                <button
+                    class="px-6 py-2 text-xs text-white bg-black rounded-sm"
+                    :class="{
+                        'bg-opacity-25 pointer-events-none': !form.isDirty,
+                    }"
+                    @click="submit()"
+                >
+                    Save Changes
+                </button>
+            </div>
+            <Sections
+                v-model="form.content.sections"
+                class="space-y-2"
+                v-if="form.content.sections"
+            />
+        </div>
+        <div
+            class="sticky top-0 flex items-center h-screen col-span-1 px-8 bg-white "
         >
-            Submit
-        </button>
-    </div>
-    <div class="container grid grid-cols-4 gap-6">
-        <Sections
-            v-model="form.content.sections"
-            class="col-span-3"
-            v-if="form.content.sections"
-        />
-        <Pool :pool="pool" class="col-span-1" />
+            <div class="w-full">
+                <Pool :pool="pool" class="col-span-1 space-y-2" />
+            </div>
+        </div>
         <DeleteSection :sections="form.content.sections" />
     </div>
 </template>
@@ -25,8 +33,8 @@ import { PropType } from 'vue';
 import {
     Sections,
     Pool,
-    Section,
-    Page,
+    SectionInterface,
+    PageInterface,
     defineContent,
     defineAttribute,
     defineSection,
@@ -36,7 +44,7 @@ import DeleteSection from '@/modules/sections/components/DeleteSection.vue';
 
 const props = defineProps({
     page: {
-        type: Object as PropType<Page>,
+        type: Object as PropType<PageInterface>,
         default: null,
     },
     options: {
@@ -89,6 +97,13 @@ const CardSection = defineSection({
                             type: 'text',
                             value: 'tag',
                         }),
+                        defineAttribute({
+                            key: 'Pages',
+                            type: 'select',
+                            value: null,
+                            options: 'pages',
+                            placeholder: 'Seite auswählen',
+                        }),
                     ],
                 },
             ],
@@ -96,9 +111,20 @@ const CardSection = defineSection({
     ],
 });
 
-const pool: Section[] = [HeroSection, CardSection];
+const TextSection = defineSection({
+    key: 'Text',
+    attributes: [
+        defineAttribute({
+            key: 'Text',
+            type: 'text',
+            value: 'Standardwert',
+        }),
+    ],
+});
 
-const form = useForm<Page>({
+const pool: SectionInterface[] = [HeroSection, CardSection, TextSection];
+
+const form = useForm<PageInterface>({
     name: 'Home',
     route: 'home',
     content: defineContent(props.page, {

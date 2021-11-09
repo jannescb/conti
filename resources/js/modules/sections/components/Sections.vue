@@ -4,23 +4,24 @@
         v-model="sections"
         :group="group"
         itemKey="uuid"
-        class="p-2 space-y-2 bg-white border border-gray-100 border-dashed rounded "
-        :class="{
-            'h-24': sections.length < 1,
+        tag="transition-group"
+        :component-data="{
+            name: !drag ? 'flip-list' : null,
         }"
+        @start="drag = true"
+        @end="drag = false"
+        v-bind="dragOptions"
     >
         <template #item="{ element }">
-            <Section :section="element" />
+            <Section :section="element" class="list-group-item" />
         </template>
     </draggable>
 </template>
 <script setup lang="ts">
-import { ref, watch, PropType } from 'vue';
+import { ref, watch, PropType, useAttrs } from 'vue';
 import draggable from 'vuedraggable';
 import Section from './Section.vue';
-import { Section as SectionInterface } from './../index';
-
-const emit = defineEmits(['update:modelValue']);
+import { SectionInterface } from './../index';
 
 const props = defineProps({
     modelValue: {
@@ -32,7 +33,13 @@ const props = defineProps({
         default: 'sections',
     },
 });
+const emit = defineEmits(['update:modelValue']);
 
+const drag = ref(false);
+const dragOptions = ref({
+    animation: 200,
+    ghostClass: 'ghost',
+});
 const sections = ref<SectionInterface[]>(props.modelValue);
 
 watch(
@@ -43,3 +50,16 @@ watch(
     { deep: true }
 );
 </script>
+
+<style>
+.flip-list-move {
+    transition: transform 0.5s;
+}
+.no-move {
+    transition: transform 0s;
+}
+.ghost {
+    opacity: 0.5;
+    background: #c8ebfb;
+}
+</style>

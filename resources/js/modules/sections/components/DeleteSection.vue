@@ -17,11 +17,11 @@
 </template>
 <script setup lang="ts">
 import { PropType } from 'vue';
-import { Section, deletionQueue } from '../index';
+import { SectionInterface, deletionQueue } from '../index';
 
 defineProps({
     sections: {
-        type: Array as PropType<Section[]>,
+        type: Array as PropType<SectionInterface[]>,
         required: true,
     },
 });

@@ -14,11 +14,13 @@ module.exports = {
             padding: '20px',
         },
         borderRadius: {
+            sm: '5px',
             DEFAULT: '10px',
             full: '9999px',
         },
         colors: {
             white: 'white',
+            black: 'black',
             primary: {
                 50: '#f6f7fb',
                 100: '#E6D8F5',
@@ -58,7 +60,7 @@ module.exports = {
             sans: ['Arial', 'sans-serif'],
         },
         fontSize: {
-            xs: ['12px', '20px'],
+            xs: ['10px', '15px'],
             sm: ['14px', '24px'],
             base: ['18px', '30px'],
             lg: ['21px', '31px'],

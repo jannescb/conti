@@ -19,9 +19,13 @@
                 </button>
             </div>
         </div>
-        <div v-for="attribute in section.attributes">
-            <Attribute :attribute="attribute" v-model="attribute.value" />
-        </div>
+        <AttributeWrapper>
+            <Attribute
+                v-for="attribute in section.attributes"
+                :attribute="attribute"
+                v-model="attribute.value"
+            />
+        </AttributeWrapper>
         <template v-if="section.sections">
             <Sections v-model="section.sections" :group="section.uuid" />
             <Pool :pool="section.pool" :group="section.uuid" />
@@ -30,12 +34,16 @@
 </template>
 <script setup lang="ts">
 import { PropType } from 'vue';
-import Pool from './Pool.vue';
-import SectionWrapper from './SectionWrapper.vue';
-import SectionTitle from './SectionTitle.vue';
-import Sections from './Sections.vue';
-import Attribute from './Attribute.vue';
-import { Section as SectionInterface, prepareForDeletion } from '../index';
+import {
+    SectionInterface,
+    prepareForDeletion,
+    Pool,
+    SectionWrapper,
+    SectionTitle,
+    Sections,
+    Attribute,
+    AttributeWrapper,
+} from './../index';
 
 defineProps({
     section: {

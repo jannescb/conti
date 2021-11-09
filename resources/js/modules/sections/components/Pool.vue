@@ -8,7 +8,6 @@
         }"
         :sort="false"
         :clone="clone"
-        class="space-y-2"
     >
         <template #item="{ element }">
             <SectionWrapper>
@@ -23,13 +22,11 @@
 import { PropType } from 'vue';
 import draggable from 'vuedraggable';
 import { v4 } from 'uuid';
-import SectionWrapper from './SectionWrapper.vue';
-import SectionTitle from './SectionTitle.vue';
-import { Section } from './../index';
+import { SectionInterface, SectionWrapper, SectionTitle } from './../index';
 
 defineProps({
     pool: {
-        type: Array as PropType<Section[]>,
+        type: Array as PropType<SectionInterface[]>,
         required: true,
     },
     group: {
@@ -38,13 +35,13 @@ defineProps({
     },
 });
 
-const clone: any = (el: Section) => {
+const clone: any = (el: SectionInterface) => {
     // we create a new pool and empty sections for nested sections
     console.log(el);
 
     let sections = {
         sections: el.pool ? [] : null,
-        pool: el.pool?.map((pool: Section) => {
+        pool: el.pool?.map((pool: SectionInterface) => {
             return clone(pool);
         }),
     };
@@ -58,3 +55,25 @@ const clone: any = (el: Section) => {
     };
 };
 </script>
+
+<style>
+.flip-list-move {
+    transition: transform 0.5s;
+}
+.no-move {
+    transition: transform 0s;
+}
+.ghost {
+    opacity: 0.5;
+    background: #c8ebfb;
+}
+.list-group {
+    min-height: 20px;
+}
+.list-group-item {
+    cursor: move;
+}
+.list-group-item i {
+    cursor: pointer;
+}
+</style>

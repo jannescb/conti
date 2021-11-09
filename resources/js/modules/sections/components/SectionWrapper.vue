@@ -1,5 +1,7 @@
 <template>
-    <div class="px-4 py-1 border border-gray-200 rounded bg-white-50">
+    <div
+        class="py-1 pl-4 pr-8 mb-2 bg-white border border-gray-200 rounded  bg-white-50"
+    >
         <div class="flex">
             <div class="pt-1 pr-4 cursor-grab">
                 <svg

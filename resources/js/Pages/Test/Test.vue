@@ -12,11 +12,13 @@
                     Save Changes
                 </button>
             </div>
-            <Sections
-                v-model="form.content.sections"
-                class="space-y-2"
-                v-if="form.content.sections"
-            />
+            <SectionsWrapper :sections="form.content.sections">
+                <Sections
+                    v-model="form.content.sections"
+                    class="space-y-2"
+                    v-if="form.content.sections"
+                />
+            </SectionsWrapper>
         </div>
         <div
             class="sticky top-0 flex items-center h-screen col-span-1 px-8 bg-white "
@@ -38,6 +40,7 @@ import {
     defineContent,
     defineAttribute,
     defineSection,
+    SectionsWrapper,
 } from '@/modules/sections';
 import { useForm } from '@inertiajs/inertia-vue3';
 import DeleteSection from '@/modules/sections/components/DeleteSection.vue';
@@ -72,6 +75,7 @@ const HeroSection = defineSection({
 });
 const CardSection = defineSection({
     key: 'Cards',
+    modal: true,
     attributes: [
         defineAttribute({
             key: 'Title',
@@ -87,25 +91,6 @@ const CardSection = defineSection({
                     type: 'text',
                     value: 'foo',
                 }),
-            ],
-            pool: [
-                {
-                    key: 'Tags',
-                    attributes: [
-                        defineAttribute({
-                            key: 'Tag',
-                            type: 'text',
-                            value: 'tag',
-                        }),
-                        defineAttribute({
-                            key: 'Pages',
-                            type: 'select',
-                            value: null,
-                            options: 'pages',
-                            placeholder: 'Seite auswählen',
-                        }),
-                    ],
-                },
             ],
         },
     ],

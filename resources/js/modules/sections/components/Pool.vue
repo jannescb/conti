@@ -11,9 +11,7 @@
     >
         <template #item="{ element }">
             <SectionWrapper>
-                <SectionTitle>
-                    {{ element.key }}
-                </SectionTitle>
+                <SectionHeader :section="element" :actions="actions" />
             </SectionWrapper>
         </template>
     </draggable>
@@ -22,7 +20,7 @@
 import { PropType } from 'vue';
 import draggable from 'vuedraggable';
 import { v4 } from 'uuid';
-import { SectionInterface, SectionWrapper, SectionTitle } from './../index';
+import { SectionInterface, SectionWrapper, SectionHeader } from './../index';
 
 defineProps({
     pool: {
@@ -32,6 +30,10 @@ defineProps({
     group: {
         type: String,
         default: 'sections',
+    },
+    actions: {
+        type: Boolean,
+        default: false,
     },
 });
 
@@ -48,6 +50,7 @@ const clone: any = (el: SectionInterface) => {
     return {
         uuid: v4(),
         key: el.key,
+        modal: el.modal,
         attributes: el.attributes.map((attr: any) => {
             return { uuid: v4(), ...attr };
         }),

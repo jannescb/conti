@@ -5,9 +5,11 @@ export { default as Sections } from './components/Sections.vue'
 export { default as Attribute } from './components/Attribute.vue'
 export { default as AttributeWrapper } from './components/AttributeWrapper.vue'
 export { default as Pool } from './components/Pool.vue'
-export { default as SectionTitle } from './components/SectionTitle.vue'
 export { default as SectionWrapper } from './components/SectionWrapper.vue'
+export { default as SectionsWrapper } from './components/SectionsWrapper.vue'
 export { default as DeleteSection } from './components/DeleteSection.vue'
+export { default as SectionHeader } from './components/SectionHeader.vue'
+export { default as SectionBody } from './components/SectionBody.vue'
 
 
 export declare interface AttributeInterface {
@@ -21,6 +23,7 @@ export declare interface AttributeInterface {
 }
 export declare interface SectionInterface {
     uuid?: string;
+    modal?: boolean;
     key: string;
     attributes: AttributeInterface[];
     sections?: SectionInterface[];

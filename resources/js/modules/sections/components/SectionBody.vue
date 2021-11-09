@@ -7,12 +7,21 @@
                 v-model="attribute.value"
             />
         </AttributeWrapper>
-        <template v-if="section.sections">
+        <div v-if="section.sections" class="pt-4">
             <SectionsWrapper :sections="section.sections">
-                <Sections v-model="section.sections" :group="section.uuid" />
+                <Sections
+                    v-model="section.sections"
+                    :group="section.uuid"
+                    :footer="section.footer"
+                    :pool="section.pool"
+                />
             </SectionsWrapper>
-            <Pool :pool="section.pool" :group="section.uuid" actions />
-        </template>
+            <Pool
+                :pool="section.pool"
+                :group="section.uuid"
+                v-if="!section.footer"
+            />
+        </div>
     </div>
 </template>
 <script setup lang="ts">

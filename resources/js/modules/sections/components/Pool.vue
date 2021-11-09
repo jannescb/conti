@@ -7,7 +7,7 @@
             put: false,
         }"
         :sort="false"
-        :clone="clone"
+        :clone="cloneSection"
     >
         <template #item="{ element }">
             <SectionWrapper>
@@ -20,7 +20,12 @@
 import { PropType } from 'vue';
 import draggable from 'vuedraggable';
 import { v4 } from 'uuid';
-import { SectionInterface, SectionWrapper, SectionHeader } from './../index';
+import {
+    SectionInterface,
+    SectionWrapper,
+    SectionHeader,
+    cloneSection,
+} from './../index';
 
 defineProps({
     pool: {
@@ -36,27 +41,6 @@ defineProps({
         default: false,
     },
 });
-
-const clone: any = (el: SectionInterface) => {
-    // we create a new pool and empty sections for nested sections
-    console.log(el);
-
-    let sections = {
-        sections: el.pool ? [] : null,
-        pool: el.pool?.map((pool: SectionInterface) => {
-            return clone(pool);
-        }),
-    };
-    return {
-        uuid: v4(),
-        key: el.key,
-        modal: el.modal,
-        attributes: el.attributes.map((attr: any) => {
-            return { uuid: v4(), ...attr };
-        }),
-        ...sections,
-    };
-};
 </script>
 
 <style>

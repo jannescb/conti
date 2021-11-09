@@ -15,13 +15,22 @@
         <template #item="{ element }">
             <Section :section="element" class="list-group-item" />
         </template>
+        <template #footer v-if="footer">
+            <button
+                class="px-6 py-2 text-xs text-white bg-black rounded-sm"
+                v-for="el in pool"
+                @click="addSection(el)"
+            >
+                Add {{ el.key }}
+            </button>
+        </template>
     </draggable>
 </template>
 <script setup lang="ts">
 import { ref, watch, PropType, useAttrs } from 'vue';
 import draggable from 'vuedraggable';
 import Section from './Section.vue';
-import { SectionInterface } from './../index';
+import { SectionInterface, cloneSection } from './../index';
 
 const props = defineProps({
     modelValue: {
@@ -32,6 +41,14 @@ const props = defineProps({
         type: String,
         default: 'sections',
     },
+    footer: {
+        type: Boolean,
+        default: false,
+    },
+    pool: {
+        type: Array as PropType<SectionInterface[]>,
+        default: null,
+    },
 });
 const emit = defineEmits(['update:modelValue']);
 
@@ -41,6 +58,10 @@ const dragOptions = ref({
     ghostClass: 'ghost',
 });
 const sections = ref<SectionInterface[]>(props.modelValue);
+
+const addSection = (el: SectionInterface) => {
+    sections.value.push(cloneSection(el));
+};
 
 watch(
     () => sections,

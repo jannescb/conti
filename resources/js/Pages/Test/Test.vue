@@ -76,6 +76,7 @@ const HeroSection = defineSection({
 const CardSection = defineSection({
     key: 'Cards',
     modal: true,
+    footer: true,
     attributes: [
         defineAttribute({
             key: 'Title',

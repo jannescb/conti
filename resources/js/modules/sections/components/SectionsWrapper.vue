@@ -1,10 +1,6 @@
 <template>
-    <div
-        class="h-full sections-wrapper"
-        :class="{
-            'border border-gray-300 border-dashed rounded': sections.length < 1,
-        }"
-    >
+    <div class="h-full sections-wrapper">
+        <div class="w-full my-4" v-if="sections.length < 1"></div>
         <slot />
     </div>
 </template>

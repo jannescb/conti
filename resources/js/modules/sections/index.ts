@@ -1,4 +1,5 @@
 import {ref} from 'vue'
+import { v4 } from 'uuid';
 
 export { default as Section } from './components/Section.vue'
 export { default as Sections } from './components/Sections.vue'
@@ -23,11 +24,16 @@ export declare interface AttributeInterface {
 }
 export declare interface SectionInterface {
     uuid?: string;
-    modal?: boolean;
     key: string;
     attributes: AttributeInterface[];
     sections?: SectionInterface[];
     pool?: any[];
+    modal?: boolean;
+    footer?: boolean;
+}
+
+export declare interface PoolInterface extends SectionInterface {
+    uuid: string;
 }
 
 export declare interface PageInterface {
@@ -55,3 +61,22 @@ export const prepareForDeletion = (section: SectionInterface) => {
     }
 };
 
+export const cloneSection: any = (el: SectionInterface) => {
+    // we create a new pool and empty sections for nested sections
+    let sections = {
+        sections: el.pool ? [] : null,
+        pool: el.pool?.map((pool: SectionInterface) => {
+            return cloneSection(pool);
+        }),
+    };
+    return {
+        uuid: v4(),
+        key: el.key,
+        modal: el.modal,
+        footer: el.footer,
+        attributes: el.attributes.map((attr: any) => {
+            return { uuid: v4(), ...attr };
+        }),
+        ...sections,
+    };
+};

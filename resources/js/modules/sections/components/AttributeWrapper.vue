@@ -1,5 +1,5 @@
 <template>
-    <div class="max-w-xl space-y-3 text-sm">
+    <div class="grid grid-cols-12 gap-4 pr-4 text-sm">
         <slot />
     </div>
 </template>

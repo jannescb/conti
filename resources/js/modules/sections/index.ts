@@ -21,6 +21,7 @@ export declare interface AttributeInterface {
     value?: string | number | boolean | null;
     options?: string;
     placeholder?: string;
+    colspan?: number;
 }
 export declare interface SectionInterface {
     uuid?: string;
@@ -30,6 +31,7 @@ export declare interface SectionInterface {
     pool?: any[];
     modal?: boolean;
     footer?: boolean;
+    cols?: number;
 }
 
 export declare interface PoolInterface extends SectionInterface {
@@ -74,6 +76,7 @@ export const cloneSection: any = (el: SectionInterface) => {
         key: el.key,
         modal: el.modal,
         footer: el.footer,
+        cols: el.cols,
         attributes: el.attributes.map((attr: any) => {
             return { uuid: v4(), ...attr };
         }),

@@ -8,7 +8,7 @@
             />
         </AttributeWrapper>
         <div v-if="section.sections" class="pt-4">
-            <SectionsWrapper :sections="section.sections">
+            <SectionsWrapper :section="section">
                 <Sections
                     v-model="section.sections"
                     :group="section.uuid"

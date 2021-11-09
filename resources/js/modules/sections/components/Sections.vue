@@ -7,6 +7,7 @@
         tag="transition-group"
         :component-data="{
             name: !drag ? 'flip-list' : null,
+            wrap: true,
         }"
         @start="drag = true"
         @end="drag = false"
@@ -16,22 +17,24 @@
             <Section :section="element" class="list-group-item" />
         </template>
         <template #footer v-if="footer">
-            <button
-                class="flex items-center px-6 py-2 text-sm text-black bg-white border border-black rounded-sm "
-                v-for="el in pool"
-                @click="addSection(el)"
-            >
-                <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="-4.5 -4.5 24 24"
-                    class="w-4 h-4 -ml-2 fill-current"
+            <div class="col-span-full">
+                <button
+                    class="flex items-center px-6 py-2 text-sm text-black bg-white border border-black rounded-sm "
+                    v-for="el in pool"
+                    @click="addSection(el)"
                 >
-                    <path
-                        d="M8.9 6.9v-5a1 1 0 1 0-2 0v5h-5a1 1 0 1 0 0 2h5v5a1 1 0 1 0 2 0v-5h5a1 1 0 1 0 0-2h-5z"
-                    ></path>
-                </svg>
-                {{ el.key }}
-            </button>
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="-4.5 -4.5 24 24"
+                        class="w-4 h-4 -ml-2 fill-current"
+                    >
+                        <path
+                            d="M8.9 6.9v-5a1 1 0 1 0-2 0v5h-5a1 1 0 1 0 0 2h5v5a1 1 0 1 0 2 0v-5h5a1 1 0 1 0 0-2h-5z"
+                        ></path>
+                    </svg>
+                    {{ el.key }}
+                </button>
+            </div>
         </template>
     </draggable>
 </template>

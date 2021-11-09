@@ -1,12 +1,16 @@
 <template>
-    <div>
+    <div :class="[colspan]">
         <label class="block pb-1 text-sm font-bold">
             {{ attribute.label || attribute.key }}
         </label>
         <div
-            class="w-full overflow-hidden text-gray-300 border-2 border-black rounded "
+            class="flex w-full h-12 overflow-hidden text-gray-300 border border-gray-300 rounded "
         >
-            <select v-model="value" v-if="attribute.type == 'select'">
+            <select
+                v-model="value"
+                v-if="attribute.type == 'select'"
+                class="w-full px-4 py-2"
+            >
                 <option
                     v-if="attribute.placeholder"
                     :selected="!value"
@@ -58,4 +62,11 @@ watch(
     },
     { deep: true }
 );
+
+const colspan = computed(() => {
+    if (props.attribute.colspan) {
+        return `col-span-${props.attribute.colspan}`;
+    }
+    return 'col-span-full';
+});
 </script>

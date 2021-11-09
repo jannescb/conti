@@ -24,11 +24,11 @@
                         leave-to="opacity-0 scale-95"
                     >
                         <div
-                            class="inline-block w-full max-w-xl py-10 pr-8 my-8 overflow-hidden text-left align-middle transition-all transform bg-white rounded shadow-xl  r"
+                            class="inline-block w-full max-w-3xl py-8 pr-8 my-8 overflow-hidden text-left align-middle transition-all transform bg-white rounded shadow-xl  r"
                         >
                             <DialogTitle
                                 as="div"
-                                class="mb-6 ml-8 text-sm font-bold text-black"
+                                class="mb-6 ml-8 text-base font-bold text-black"
                                 v-if="title"
                             >
                                 {{ title }}

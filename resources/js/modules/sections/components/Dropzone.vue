@@ -9,10 +9,10 @@
                 {{ form.progress.percentage }}%
             </progress>
         </div>
-        <div class="grid gap-4 grid-cols-121">
+        <div class="grid grid-cols-12 gap-4">
             <div
                 v-for="img in gallery"
-                class="relative col-span-6"
+                class="relative col-span-3"
                 @click="value = img.id"
             >
                 <img
@@ -24,7 +24,11 @@
                 />
             </div>
         </div>
-        <input type="file" @input="form.file = $event.target.files[0]" />
+        <input
+            type="file"
+            @input="form.file = $event.target.files[0]"
+            class="w-full h-32 bg-gray-100 rounded"
+        />
         <button @click="submit">Submit</button>
     </Modal>
     <div class="w-full col-span-full" @click="showModal = true">

@@ -10,9 +10,9 @@ class HomeController
     public function __invoke()
     {
         return Inertia::render('Test/Test', [
-            'page'    => Page::where('name', 'Home')->first(),
-            'options' => [
-                'pages' => Page::all()->mapWithKeys(function ($page) {
+            'page'      => Page::where('name', 'Home')->first(),
+            'relations' => [
+                Page::class => Page::all()->mapWithKeys(function ($page) {
                     return [
                         $page->id => $page->name,
                     ];

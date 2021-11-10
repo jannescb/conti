@@ -1,5 +1,5 @@
 import {ref} from 'vue'
-import { v4 } from 'uuid';
+import { v4 as uuid } from 'uuid';
 
 export { default as Section } from './components/Section.vue'
 export { default as Sections } from './components/Sections.vue'
@@ -18,24 +18,20 @@ export declare interface AttributeInterface {
     key: string;
     type: string;
     label?: string | null;
-    value?: string | number | boolean | null;
-    options?: string;
+    value?: string | number | boolean | any[] | null;
+    relation?: string;
+    resource?: string;
     placeholder?: string;
-    colspan?: number;
+    class?: string;
 }
 export declare interface SectionInterface {
     uuid?: string;
     key: string;
     attributes: AttributeInterface[];
     sections?: SectionInterface[];
-    pool?: any[];
+    children?: any[];
     modal?: boolean;
-    footer?: boolean;
-    cols?: number;
-}
-
-export declare interface PoolInterface extends SectionInterface {
-    uuid: string;
+    class?: string;
 }
 
 export declare interface PageInterface {
@@ -51,8 +47,16 @@ export const defineContent = (page: PageInterface, content: any) => {
 export const defineSection = (section:  SectionInterface) => {
     return section
 }
+
 export const defineAttribute = (attribute:  AttributeInterface) => {
     return attribute
+}
+
+export const sectionPool = ref<SectionInterface[]>([]);
+
+export const fillPool = (sections:  SectionInterface[]) => {
+    sectionPool.value = sections
+    return sectionPool
 }
 
 export const deletionQueue = ref<string[]>([])
@@ -64,22 +68,39 @@ export const prepareForDeletion = (section: SectionInterface) => {
 };
 
 export const cloneSection: any = (el: SectionInterface) => {
-    // we create a new pool and empty sections for nested sections
     let sections = {
-        sections: el.pool ? [] : null,
-        pool: el.pool?.map((pool: SectionInterface) => {
-            return cloneSection(pool);
-        }),
+        sections: el.children ? [] : null,
     };
+
     return {
-        uuid: v4(),
+        uuid: uuid(),
         key: el.key,
-        modal: el.modal,
-        footer: el.footer,
-        cols: el.cols,
         attributes: el.attributes.map((attr: any) => {
-            return { uuid: v4(), ...attr };
+            return cloneAttribute(attr);
         }),
         ...sections,
     };
+};
+
+export const cloneAttribute = (attribute: AttributeInterface) => {
+    let clone = {
+        key: attribute.key,
+        value: attribute.value,
+        relation: attribute.relation,
+        resource: attribute.resource,
+    }
+    return { uuid: uuid(), ...clone };
+}
+
+
+export const getSectionByKey = (key: string) => {
+    return sectionPool.value.find((section: SectionInterface) => section.key == key)
+}
+export const getSectionClass = (section: SectionInterface) => {
+    return getSectionByKey(section.key)?.class
+};
+export const getAttribute = (sectionKey: string, attributeKey: string) => {
+    return getSectionByKey(sectionKey)
+        ?.attributes
+        .find((attr: AttributeInterface) => attr.key == attributeKey)
 };

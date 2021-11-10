@@ -2,10 +2,13 @@
     <div class="grid grid-cols-4">
         <div class="h-screen col-span-3 px-12 overflow-y-scroll bg-primary-50">
             <h1 class="pt-4">Home</h1>
-
             <Attribute
                 v-model="form.content.h1"
                 :attribute="{ key: 'H1', type: 'text' }"
+            />
+            <Attribute
+                v-model="form.content.h2"
+                :attribute="{ key: 'H2', type: 'text' }"
             />
             <SectionsWrapper>
                 <Sections
@@ -39,7 +42,15 @@
                 </button>
             </div>
             <div class="flex items-center flex-1 w-full">
-                <Pool :pool="pool" class="w-full col-span-1 space-y-2" />
+                <Pool
+                    :pool="[
+                        TextSection,
+                        CardsSection,
+                        HeroSection,
+                        RelationsSection,
+                    ]"
+                    class="w-full col-span-1 space-y-2"
+                />
             </div>
         </div>
         <DeleteSection :sections="form.content.sections" />
@@ -50,16 +61,21 @@ import { PropType } from 'vue';
 import {
     Sections,
     Pool,
-    SectionInterface,
     PageInterface,
     defineContent,
-    defineAttribute,
-    defineSection,
     SectionsWrapper,
     Attribute,
+    fillPool,
 } from '@/modules/sections';
 import { useForm } from '@inertiajs/inertia-vue3';
 import DeleteSection from '@/modules/sections/components/DeleteSection.vue';
+import {
+    HeroSection,
+    CardsSection,
+    TextSection,
+    CardSection,
+    RelationsSection,
+} from './sections';
 
 const props = defineProps({
     page: {
@@ -72,67 +88,21 @@ const props = defineProps({
     },
 });
 
-const HeroSection = defineSection({
-    key: 'Hero',
-    attributes: [
-        defineAttribute({
-            key: 'Title',
-            type: 'text',
-            value: 'foo',
-            colspan: 6,
-        }),
-        defineAttribute({
-            key: 'Pages',
-            type: 'select',
-            value: null,
-            options: 'pages',
-            placeholder: 'Seite auswählen',
-            colspan: 6,
-        }),
-    ],
-});
-const CardSection = defineSection({
-    key: 'Cards',
-    modal: true,
-    footer: true,
-    cols: 2,
-    attributes: [
-        defineAttribute({
-            key: 'Title',
-            type: 'text',
-        }),
-    ],
-    pool: [
-        {
-            key: 'Card',
-            attributes: [
-                defineAttribute({
-                    key: 'Title',
-                    type: 'text',
-                    value: 'foo',
-                }),
-            ],
-        },
-    ],
-});
-const TextSection = defineSection({
-    key: 'Text',
-    attributes: [
-        defineAttribute({
-            key: 'Text',
-            type: 'text',
-            value: 'Standardwert',
-        }),
-    ],
-});
-
-const pool: SectionInterface[] = [HeroSection, CardSection, TextSection];
+//HeroSection, CardsSection,
+fillPool([
+    TextSection,
+    CardsSection,
+    CardSection,
+    HeroSection,
+    RelationsSection,
+]);
 
 const form = useForm<PageInterface>({
     name: 'Home',
     route: 'home',
     content: defineContent(props.page, {
         h1: null,
+        h2: null,
         sections: [],
     }),
 });

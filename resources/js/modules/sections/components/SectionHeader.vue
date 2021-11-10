@@ -21,7 +21,7 @@
             {{ section.key }}
         </div>
         <div class="flex justify-end flex-1 space-x-4" v-if="actions">
-            <button v-if="section.modal" @click="visible = true">
+            <button v-if="modal" @click="visible = true">
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="-2.5 -2.5 24 24"
@@ -46,15 +46,20 @@
         </div>
     </div>
     <Modal v-model="visible" :title="section.key">
-        <SectionBody :section="section" />
+        <SectionBody :section="section" :show="true" />
     </Modal>
 </template>
 <script setup lang="ts">
-import { PropType, ref } from 'vue';
-import { SectionInterface, prepareForDeletion, SectionBody } from './../index';
+import { PropType, ref, computed } from 'vue';
+import {
+    SectionInterface,
+    prepareForDeletion,
+    SectionBody,
+    getSectionByKey,
+} from './../index';
 import Modal from './Modal.vue';
 
-defineProps({
+const props = defineProps({
     section: {
         type: Object as PropType<SectionInterface>,
         required: true,
@@ -66,4 +71,8 @@ defineProps({
 });
 
 const visible = ref(false);
+
+const modal = computed(() => {
+    return getSectionByKey(props.section.key)?.modal;
+});
 </script>

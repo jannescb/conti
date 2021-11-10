@@ -19,7 +19,6 @@
 <script setup lang="ts">
 import { PropType } from 'vue';
 import draggable from 'vuedraggable';
-import { v4 } from 'uuid';
 import {
     SectionInterface,
     SectionWrapper,
@@ -42,25 +41,3 @@ defineProps({
     },
 });
 </script>
-
-<style>
-.flip-list-move {
-    transition: transform 0.5s;
-}
-.no-move {
-    transition: transform 0s;
-}
-.ghost {
-    opacity: 0.5;
-    background: #c8ebfb;
-}
-.list-group {
-    min-height: 20px;
-}
-.list-group-item {
-    cursor: move;
-}
-.list-group-item i {
-    cursor: pointer;
-}
-</style>

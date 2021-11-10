@@ -14,14 +14,18 @@
         v-bind="dragOptions"
     >
         <template #item="{ element }">
-            <Section :section="element" class="list-group-item" />
+            <Section
+                :section="element"
+                class="list-group-item"
+                :class="getSectionClass(element)"
+            />
         </template>
-        <template #footer v-if="footer">
+        <template #footer v-if="children?.length > 0">
             <div class="col-span-full">
                 <button
                     class="flex items-center px-6 py-2 text-sm text-black bg-white border border-black rounded-sm "
-                    v-for="el in pool"
-                    @click="addSection(el)"
+                    v-for="child in children"
+                    @click="addSection(child)"
                 >
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -32,17 +36,22 @@
                             d="M8.9 6.9v-5a1 1 0 1 0-2 0v5h-5a1 1 0 1 0 0 2h5v5a1 1 0 1 0 2 0v-5h5a1 1 0 1 0 0-2h-5z"
                         ></path>
                     </svg>
-                    {{ el.key }}
+                    {{ child.key }}
                 </button>
             </div>
         </template>
     </draggable>
 </template>
 <script setup lang="ts">
-import { ref, watch, PropType, useAttrs } from 'vue';
+import { ref, watch, PropType, computed } from 'vue';
 import draggable from 'vuedraggable';
 import Section from './Section.vue';
-import { SectionInterface, cloneSection } from './../index';
+import {
+    SectionInterface,
+    cloneSection,
+    getSectionByKey,
+    getSectionClass,
+} from './../index';
 
 const props = defineProps({
     modelValue: {
@@ -53,12 +62,8 @@ const props = defineProps({
         type: String,
         default: 'sections',
     },
-    footer: {
-        type: Boolean,
-        default: false,
-    },
-    pool: {
-        type: Array as PropType<SectionInterface[]>,
+    section: {
+        type: Object as PropType<SectionInterface>,
         default: null,
     },
 });
@@ -82,6 +87,13 @@ watch(
     },
     { deep: true }
 );
+
+const children = computed(() => {
+    if (!props.section) {
+        return;
+    }
+    return getSectionByKey(props.section.key)?.children;
+});
 </script>
 
 <style>

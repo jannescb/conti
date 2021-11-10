@@ -24,4 +24,16 @@ class PageController
 
         return Redirect::route($validated['route']);
     }
+
+    public function upload(Request $request, Page $page)
+    {
+        $validated = $request->validate([
+            'route' => 'required|string',
+            'file'  => 'required',
+        ]);
+
+        $file = $page->addFile($validated['file'])->save();
+
+        return Redirect::route($validated['route']);
+    }
 }

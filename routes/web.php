@@ -18,3 +18,4 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', HomeController::class)->name('home');
 
 Route::post('/pages', [PageController::class, 'update'])->name('pages.update');
+Route::post('/pages/{page}/files', [PageController::class, 'upload'])->name('pages.upload');

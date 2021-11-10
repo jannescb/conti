@@ -13,6 +13,7 @@
         "@inertiajs/inertia": "^0.10.0",
         "@inertiajs/inertia-vue3": "^0.5.1",
         "@tailwindcss/typography": "^0.4.1",
+        "@types/dropzone": "^5.7.4",
         "@types/lodash.maxby": "^4.6.6",
         "@vue/compiler-sfc": "^3.1.5",
         "axios": "^0.21.4",
@@ -29,7 +30,9 @@
     },
     "dependencies": {
         "@headlessui/vue": "^1.4.2",
+        "@inertiajs/progress": "^0.2.6",
         "@types/uuid": "^8.3.1",
+        "dropzone": "^6.0.0-beta.1",
         "lodash.maxby": "^4.6.0",
         "uuid": "^3.4.0",
         "vuedraggable": "^4.1.0"

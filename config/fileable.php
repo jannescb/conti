@@ -5,7 +5,7 @@ return [
      * The disk on which to store added files by default.
      * Choose a disk you've configured in config/filesystems.php.
      */
-    'disk' => 'local',
+    'disk' => 'files',
 
     /*
      * The file eloquent models FQCN.

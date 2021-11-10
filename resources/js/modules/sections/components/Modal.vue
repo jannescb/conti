@@ -24,7 +24,7 @@
                         leave-to="opacity-0 scale-95"
                     >
                         <div
-                            class="inline-block w-full max-w-3xl py-8 pr-8 my-8 overflow-hidden text-left align-middle transition-all transform bg-white rounded shadow-xl  r"
+                            class="inline-block w-full max-w-3xl p-8 my-8 overflow-hidden text-left align-middle transition-all transform bg-white rounded shadow-xl  r"
                         >
                             <DialogTitle
                                 as="div"

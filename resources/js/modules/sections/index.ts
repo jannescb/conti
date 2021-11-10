@@ -1,16 +1,17 @@
 import {ref} from 'vue'
 import { v4 as uuid } from 'uuid';
 
-export { default as Section } from './components/Section.vue'
-export { default as Sections } from './components/Sections.vue'
 export { default as Attribute } from './components/Attribute.vue'
 export { default as AttributeWrapper } from './components/AttributeWrapper.vue'
-export { default as Pool } from './components/Pool.vue'
-export { default as SectionWrapper } from './components/SectionWrapper.vue'
-export { default as SectionsWrapper } from './components/SectionsWrapper.vue'
 export { default as DeleteSection } from './components/DeleteSection.vue'
-export { default as SectionHeader } from './components/SectionHeader.vue'
+export { default as Dropzone } from './components/Dropzone.vue'
+export { default as Pool } from './components/Pool.vue'
+export { default as Section } from './components/Section.vue'
 export { default as SectionBody } from './components/SectionBody.vue'
+export { default as SectionHeader } from './components/SectionHeader.vue'
+export { default as SectionWrapper } from './components/SectionWrapper.vue'
+export { default as Sections } from './components/Sections.vue'
+export { default as SectionsWrapper } from './components/SectionsWrapper.vue'
 
 
 export declare interface AttributeInterface {

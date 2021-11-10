@@ -23,6 +23,12 @@ export const HeroSection = defineSection({
             class: 'col-span-6',
         }),
         defineAttribute({
+            key: 'Image',
+            type: 'image',
+            value: null,
+            class: 'col-span-6',
+        }),
+        defineAttribute({
             key: 'Pages',
             type: 'select',
             value: null,

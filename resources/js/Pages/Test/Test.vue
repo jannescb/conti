@@ -10,6 +10,7 @@
                 v-model="form.content.h2"
                 :attribute="{ key: 'H2', type: 'text' }"
             />
+            <!-- <Dropzone /> -->
             <SectionsWrapper>
                 <Sections
                     v-model="form.content.sections"
@@ -66,6 +67,7 @@ import {
     SectionsWrapper,
     Attribute,
     fillPool,
+    Dropzone,
 } from '@/modules/sections';
 import { useForm } from '@inertiajs/inertia-vue3';
 import DeleteSection from '@/modules/sections/components/DeleteSection.vue';

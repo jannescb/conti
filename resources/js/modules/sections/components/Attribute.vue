@@ -3,13 +3,11 @@
         <label class="block pb-1 text-sm font-bold">
             {{ config('label') || attribute.key }}
         </label>
-        <div
-            class="flex w-full h-12 overflow-hidden text-gray-300 border border-gray-300 rounded "
-        >
+        <div class="flex w-full text-gray-300">
             <select
                 v-model="value"
                 v-if="config('type') == 'select'"
-                class="w-full px-4 py-2"
+                class="w-full h-12 px-4 py-2 border border-gray-200 rounded"
             >
                 <option
                     v-if="config('placeholder')"
@@ -33,11 +31,14 @@
                     <label :for="option">{{ option }}</label>
                 </div>
             </div>
+            <div v-else-if="config('type') == 'image'" class="w-full">
+                <Dropzone v-model="value" />
+            </div>
             <input
                 :type="config('type')"
                 v-else
                 v-model="value"
-                class="w-full px-4 py-2"
+                class="w-full h-12 px-4 py-2 border border-gray-200 rounded"
                 :placeholder="config('placeholder')"
             />
         </div>
@@ -46,7 +47,8 @@
 <script setup lang="ts">
 import { PropType, defineEmits, ref, watch, computed } from 'vue';
 import { usePage } from '@inertiajs/inertia-vue3';
-import { AttributeInterface, getAttribute } from './../index';
+import { Dropzone, AttributeInterface, getAttribute } from './../index';
+
 const props = defineProps({
     modelValue: {
         type: Array as PropType<any>,

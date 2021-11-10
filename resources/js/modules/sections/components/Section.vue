@@ -1,7 +1,11 @@
 <template>
     <SectionWrapper>
         <SectionHeader :section="section" :actions="true" />
-        <SectionBody v-if="!section.modal" :section="section" />
+        <SectionBody
+            v-if="!section.modal"
+            :section="section"
+            class="pb-8 pl-8"
+        />
     </SectionWrapper>
 </template>
 <script setup lang="ts">

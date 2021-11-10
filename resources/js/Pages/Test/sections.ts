@@ -1,4 +1,5 @@
 import { defineSection, defineAttribute } from "@/modules/sections";
+import { Input, Upload, Checkboxes, Select, Richtext } from "@/modules/sections/Formfields";
 
 export const CardSection = defineSection({
     key: 'Card',
@@ -7,7 +8,7 @@ export const CardSection = defineSection({
         defineAttribute({
             key: 'Title',
             type: 'text',
-            value: 'foo',
+            as: Input,
         }),
     ],
 });
@@ -19,12 +20,14 @@ export const HeroSection = defineSection({
         defineAttribute({
             key: 'Title',
             type: 'text',
+            as: Input,
             value: 'foo',
             class: 'col-span-6',
         }),
         defineAttribute({
             key: 'Image',
             type: 'image',
+            as: Upload,
             value: null,
             class: 'col-span-6',
         }),
@@ -46,6 +49,7 @@ export const RelationsSection = defineSection({
         defineAttribute({
             key: 'Page',
             type: 'select',
+            as: Select,
             value: null,
             class: 'col-span-6',
             relation: 'App\\Models\\Page',
@@ -55,6 +59,7 @@ export const RelationsSection = defineSection({
         defineAttribute({
             key: 'Pages',
             type: 'checkbox',
+            as: Checkboxes,
             value: [],
             class: 'col-span-6',
             relation: 'App\\Models\\Page',
@@ -72,6 +77,7 @@ export const CardsSection = defineSection({
         defineAttribute({
             key: 'Title',
             type: 'text',
+            as: Input,
             value: 'Modal Foo',
             class: 'col-span-10'
         }),
@@ -86,14 +92,16 @@ export const TextSection = defineSection({
         defineAttribute({
             key: 'Text',
             type: 'text',
+            as: Input,
             value: null,
             class: 'col-span-4'
         }),
         defineAttribute({
             key: 'Bar',
             type: 'text',
+            as: Richtext,
             value: null,
-            class: 'col-span-8'
+            class: 'col-span-12'
         }),
     ],
 });

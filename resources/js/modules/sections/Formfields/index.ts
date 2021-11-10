@@ -1,0 +1,5 @@
+export { default as Input } from './Input/Input.vue'
+export { default as Upload } from './Upload/Upload.vue'
+export { default as Checkboxes } from './Checkboxes/Checkboxes.vue'
+export { default as Select } from './Select/Select.vue'
+export { default as Richtext } from './Richtext/Richtext.vue'

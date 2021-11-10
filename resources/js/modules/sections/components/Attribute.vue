@@ -4,50 +4,23 @@
             {{ config('label') || attribute.key }}
         </label>
         <div class="flex w-full text-gray-300">
-            <select
+            <component
+                v-if="formField"
+                :is="formField"
                 v-model="value"
-                v-if="config('type') == 'select'"
-                class="w-full h-12 px-4 py-2 border border-gray-200 rounded"
-            >
-                <option
-                    v-if="config('placeholder')"
-                    :selected="!value"
-                    disabled
-                >
-                    {{ config('placeholder') }}
-                </option>
-                <option :value="id" v-for="(option, id) in options">
-                    {{ option }}
-                </option>
-            </select>
-            <div v-else-if="config('type') == 'checkbox'">
-                <div v-for="(option, id) in options">
-                    <input
-                        type="checkbox"
-                        :id="option"
-                        :value="id"
-                        v-model="value"
-                    />
-                    <label :for="option">{{ option }}</label>
-                </div>
-            </div>
-            <div v-else-if="config('type') == 'image'" class="w-full">
-                <Dropzone v-model="value" />
-            </div>
-            <input
-                :type="config('type')"
-                v-else
-                v-model="value"
-                class="w-full h-12 px-4 py-2 border border-gray-200 rounded"
+                :attribute="attribute"
+                :options="options"
                 :placeholder="config('placeholder')"
+                :label="config('label') || attribute.key"
             />
+            <div v-else class="text-xs text-primary">No Formfield defined.</div>
         </div>
     </div>
 </template>
 <script setup lang="ts">
 import { PropType, defineEmits, ref, watch, computed } from 'vue';
 import { usePage } from '@inertiajs/inertia-vue3';
-import { Dropzone, AttributeInterface, getAttribute } from './../index';
+import { AttributeInterface, getAttribute } from './../index';
 
 const props = defineProps({
     modelValue: {
@@ -62,8 +35,8 @@ const props = defineProps({
         type: String,
         default: null,
     },
-    type: {
-        type: String,
+    as: {
+        type: Object,
         default: null,
     },
 });
@@ -99,4 +72,8 @@ const config = (key: string) => {
 
     return attr?.[key];
 };
+
+const formField = computed(() => {
+    return config('as') || props.as;
+});
 </script>

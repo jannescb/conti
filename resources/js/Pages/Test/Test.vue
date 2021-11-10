@@ -2,16 +2,46 @@
     <div class="grid grid-cols-4">
         <div class="h-screen col-span-3 px-12 overflow-y-scroll bg-primary-50">
             <h1 class="pt-4">Home</h1>
+
             <Attribute
                 v-model="form.content.h1"
                 :attribute="{ key: 'H1', type: 'text' }"
+                :as="Input"
             />
             <Attribute
                 v-model="form.content.h2"
                 :attribute="{ key: 'H2', type: 'text' }"
+                :as="Input"
             />
-            <!-- <Dropzone /> -->
-            <SectionsWrapper>
+            <Attribute
+                v-model="form.content.excerpt"
+                :attribute="{ key: 'Excerpt', type: 'text' }"
+                :as="Input"
+            />
+            <!-- :as="Input" -->
+            <div class="flex justify-end pt-6 space-x-3 text-xs">
+                <button
+                    :class="{ 'font-bold': collapse }"
+                    @click="collapse = true"
+                >
+                    collapse all
+                </button>
+                <button
+                    :class="{ 'font-bold': !collapse }"
+                    @click="collapse = false"
+                >
+                    show all
+                </button>
+            </div>
+            <SectionsWrapper
+                :class="{
+                    'bg-primary-100 rounded min-h-full mt-4 flex items-center justify-center text-sm text-primary-700':
+                        form.content.sections.length < 1,
+                }"
+            >
+                <div v-if="form.content.sections.length < 1">
+                    Put your content here.
+                </div>
                 <Sections
                     v-model="form.content.sections"
                     class="space-y-2"
@@ -67,8 +97,10 @@ import {
     SectionsWrapper,
     Attribute,
     fillPool,
-    Dropzone,
+    collapse,
+    SectionWrapper,
 } from '@/modules/sections';
+import { Input, Richtext } from '@/modules/sections/Formfields';
 import { useForm } from '@inertiajs/inertia-vue3';
 import DeleteSection from '@/modules/sections/components/DeleteSection.vue';
 import {

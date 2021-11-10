@@ -21,7 +21,7 @@
             {{ section.key }}
         </div>
         <div class="flex justify-end flex-1 space-x-4" v-if="actions">
-            <button v-if="modal" @click="visible = true">
+            <button v-if="modal" @click="(visible = true), (collapse = false)">
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="-2.5 -2.5 24 24"
@@ -56,6 +56,7 @@ import {
     prepareForDeletion,
     SectionBody,
     getSectionByKey,
+    collapse,
 } from './../index';
 import Modal from './Modal.vue';
 

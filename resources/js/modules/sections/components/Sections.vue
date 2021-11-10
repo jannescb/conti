@@ -105,6 +105,7 @@ const children = computed(() => {
 }
 .ghost {
     opacity: 0.5;
-    background: #c8ebfb;
+    background: #dde0ee;
+    border: none;
 }
 </style>

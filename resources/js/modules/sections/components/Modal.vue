@@ -28,7 +28,7 @@
                         >
                             <DialogTitle
                                 as="div"
-                                class="mb-6 ml-8 text-base font-bold text-black"
+                                class="mb-6 text-base font-bold text-black"
                                 v-if="title"
                             >
                                 {{ title }}

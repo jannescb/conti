@@ -1,5 +1,5 @@
 <template>
-    <div class="pb-8 pl-8" v-if="show">
+    <div v-if="showBody && !collapse">
         <AttributeWrapper :class="getSectionClass(section)">
             <Attribute
                 v-for="attribute in section.attributes"
@@ -32,6 +32,7 @@ import {
     SectionsWrapper,
     getSectionClass,
     getSectionByKey,
+    collapse,
 } from './../index';
 
 const props = defineProps({
@@ -45,7 +46,7 @@ const props = defineProps({
     },
 });
 
-const show = computed(() => {
+const showBody = computed(() => {
     if (props.show) {
         return true;
     }
